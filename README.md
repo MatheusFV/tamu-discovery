@@ -1,4 +1,4 @@
-##Trying it out:
+## Trying it out:
 
 Run `$ yarn install` from the root to install all the dependencies
 
