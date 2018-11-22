@@ -10,15 +10,13 @@ module.exports = {
         var devices = []
         bonjour.find({ type: 'http' }, function (service) {
             if (service && service.name.indexOf("DIBUA") !== -1) {
-                devices.push(JSON.stringify({port: service.port, name: service.name, service: service}))
+                devices.push({port: service.port, name: service.name, service: service})
             }
         })
 
         setTimeout(function () {
-            console.log(devices)
-            request.post('https://tamu-backend.herokuapp.com/message/savePorts', {devices}, function(err, response) {
+            request.post('https://tamu-backend.herokuapp.com/message/savePorts', {json: {devices}}, function(err, response) {
                 console.log(err)
-                console.log(response)
             })
         }, 5000, 'funky');
     }
