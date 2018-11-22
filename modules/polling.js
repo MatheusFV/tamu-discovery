@@ -11,10 +11,8 @@ module.exports = {
                 for (var key in data) {
                     const url = `http://${key}/send-message`
                     request.post(url, {json: {message: data[key]}}, function(err, response) {
-                        console.log(err)
                     })
                 }
-                // Send the message to dibua
             });
 
         }).on("error", (err) => {
