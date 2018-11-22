@@ -1,12 +1,19 @@
 const https = require('https');
 const discovery = require('./discovery/discoveryController');
+const request = require('request');
 
 module.exports = {
     requestData() {
         https.get('https://tamu-backend.herokuapp.com/message/getMessages', (resp) => {
             // A chunk of data has been recieved.
             resp.on('data', (chunk) => {
-                // console.log('Data received:', JSON.parse(chunk))
+                const data = JSON.parse(chunk).data
+                for (var key in data) {
+                    const url = `http://${key}/send-message`
+                    request.post(url, {json: {message: data[key]}}, function(err, response) {
+                        console.log(err)
+                    })
+                }
                 // Send the message to dibua
             });
 

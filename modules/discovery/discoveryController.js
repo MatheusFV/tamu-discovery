@@ -1,9 +1,6 @@
 var bonjour = require('bonjour')()
 const request = require('request');
 
-bonjour.publish({ name: 'DIBUA_2', type: 'http', port: 3001 })
-bonjour.publish({ name: 'DIBUA_1', type: 'http', port: 3002 })
-
 module.exports = {
     discoverDevices() {
         // Uncomment this to test
@@ -15,9 +12,13 @@ module.exports = {
         })
 
         setTimeout(function () {
+            // const url = `http://${devices[0].service.addresses[0]}:${devices[0].port}/send-message`
             request.post('https://tamu-backend.herokuapp.com/message/savePorts', {json: {devices}}, function(err, response) {
                 console.log(err)
             })
+            // request.post(url, {json: {message: 'oi dibua'}}, function(err, response) {
+            //     console.log(err)
+            // })
         }, 5000, 'funky');
     }
 }
