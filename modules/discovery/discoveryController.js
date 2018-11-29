@@ -12,6 +12,7 @@ module.exports = {
         })
 
         setTimeout(function () {
+            console.log(devices)
             request.post('https://tamu-backend.herokuapp.com/message/savePorts', {json: {devices}}, function(err, response) {
                 console.log(err)
             })
